@@ -2128,6 +2128,131 @@ async function loadAdminOrders() {
     renderOrders(Array.isArray(data.orders) ? data.orders : []);
   }
 }
+    <script>
+  // تسجيل دخول المشرف وحفظ كلمة السر في sessionStorage فقط
+  async function loginAdmin(passwordInput) {
+    const res = await fetch("/api/verify-admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: passwordInput }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || "كلمة سر المشرف غير صحيحة");
+    }
+
+    sessionStorage.setItem("bareeq_admin_pass", passwordInput);
+    return true;
+  }
+
+  function getAdminPassword() {
+    return sessionStorage.getItem("bareeq_admin_pass") || "";
+  }
+
+  // تحميل المنتجات من Upstash وتحديث state.products
+  async function loadStoreProducts() {
+    try {
+      const res = await fetch("/api/products", { cache: "no-store" });
+      const data = await res.json();
+      if (res.ok && Array.isArray(data.products) && data.products.length > 0) {
+        if (typeof state !== "undefined") {
+          state.products = data.products;
+        }
+        if (typeof renderProducts === "function") {
+          renderProducts(state.products);
+        } else if (typeof renderAll === "function") {
+          renderAll();
+        }
+      }
+    } catch (err) {
+      console.error("خطأ في تحميل المنتجات:", err);
+    }
+  }
+
+  // حفظ أو تعديل منتج وتحديث state.products
+  async function saveAdminProduct(productData) {
+    const pass = getAdminPassword();
+    const res = await fetch("/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-admin-password": pass,
+      },
+      body: JSON.stringify({ product: productData, adminPassword: pass }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "فشل حفظ المنتج");
+    }
+
+    if (typeof state !== "undefined" && Array.isArray(data.products)) {
+      state.products = data.products;
+    }
+    if (typeof renderProducts === "function") {
+      renderProducts(data.products || []);
+    } else if (typeof renderAll === "function") {
+      renderAll();
+    }
+    return data.products;
+  }
+
+  // إرسال طلب جديد من العميل وحفظه في Redis + تحديث state.orders
+  async function sendCustomerOrder(orderData) {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: orderData }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "فشل إرسال الطلب");
+    }
+
+    const savedOrder = data.order || orderData;
+    if (typeof state !== "undefined") {
+      if (!Array.isArray(state.orders)) state.orders = [];
+      state.orders.unshift(savedOrder);
+    }
+    if (typeof renderOrders === "function") {
+      renderOrders(state.orders || []);
+    }
+    return savedOrder;
+  }
+
+  // جلب الطلبات من Upstash للمشرف وتحديث state.orders
+  async function loadAdminOrders() {
+    const pass = getAdminPassword();
+    const res = await fetch("/api/orders", {
+      method: "GET",
+      headers: { "x-admin-password": pass },
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || "فشل جلب الطلبات");
+    }
+
+    const ordersList = Array.isArray(data.orders) ? data.orders : [];
+    if (typeof state !== "undefined") {
+      state.orders = ordersList;
+    }
+    if (typeof renderOrders === "function") {
+      renderOrders(ordersList);
+    }
+    return ordersList;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadStoreProducts();
+    if (getAdminPassword()) {
+      loadAdminOrders().catch(() => {});
+    }
+  });
+</script>
   </script>
 </body>
 </html>
