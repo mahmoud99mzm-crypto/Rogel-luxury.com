@@ -1234,23 +1234,11 @@
 
       let isSyncingPrice = false;
 
-       {
-        try {
-          
-          if (!raw) return structuredClone(fallback);
-          return JSON.parse(raw);
-        } catch {
-          return structuredClone(fallback);
-        }
-      }
+       
+       
+      
 
-     {
-        try {
-        
-        } catch {
-          showToast('تعذر حفظ البيانات محلياً في المتصفح', 'error');
-        }
-      }
+    
 
       function formatKWD(amount) {
         const num = Number(amount) || 0;
