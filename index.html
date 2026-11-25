@@ -1223,7 +1223,7 @@
       let state = {
         products: DEFAULT_PRODUCTS.map((item)=>({ ...item})),
         settings: { ...DEFAULT_SETTINGS},
-        cart: []
+        cart: [],
         orders:[],
         session: null,
         activeCategory: 'الكل',
@@ -1234,9 +1234,9 @@
 
       let isSyncingPrice = false;
 
-      function loadFromStorage(key, fallback) {
+       {
         try {
-          const raw = localStorage.getItem(key);
+          
           if (!raw) return structuredClone(fallback);
           return JSON.parse(raw);
         } catch {
@@ -1450,7 +1450,7 @@
         } else {
           state.cart.push({ id: prod.id, qty: 1 });
         }
-        saveToStorage(STORAGE_KEYS.CART, state.cart);
+        
         updateCartBadge();
         showToast(`تمت إضافة "${prod.name}" إلى السلة`, 'success');
       }
