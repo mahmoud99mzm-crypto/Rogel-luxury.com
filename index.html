@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بَريق للإكسسوارات — الكويت</title>
+  <title>روجيل لاكشري للاكسسوارات— الكويت</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -844,7 +844,7 @@
         <a href="#" class="brand-logo">
           <div class="brand-mark">ب</div>
           <div class="brand-text">
-            <h1 id="storeTitleDisplay">بَريق للإكسسوارات — الكويت</h1>
+            <h1 id="storeTitleDisplay">روجيل لاكشري— الكويت</h1>
             <span id="storeSubtitleDisplay">قطع مختارة بعناية • توصيل لجميع محافظات الكويت</span>
           </div>
         </a>
@@ -957,7 +957,7 @@
       <div id="googleSignInArea" style="margin-bottom: 16px;">
         <div id="googleButtonContainer" style="display:flex; justify-content:center; min-height:42px;"></div>
         <button type="button" id="googleFallbackBtn" class="btn btn-ghost" style="width:100%; margin-top:8px; display:none;">
-          <span>الدخول عبر جوجل (وضع معاينة بدون مفتاح)</span>
+          <span> عبر جوجل</span>
         </button>
       </div>
 
@@ -987,7 +987,7 @@
   <div id="adminModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
     <div class="modal-panel wide">
       <div class="modal-header">
-        <h4 id="adminModalTitle">لوحة تحكم المشرف — بَريق الكويت</h4>
+        <h4 id="adminModalTitle">لوحة تحكم المشرف — روجيل كويت</h4>
         <button type="button" class="close-btn" data-close="adminModal">&times;</button>
       </div>
 
@@ -1133,6 +1133,7 @@
               <option value="الأحمدي">الأحمدي</option>
               <option value="الجهراء">الجهراء</option>
               <option value="مبارك الكبير">مبارك الكبير</option>
+            
             </select>
           </div>
 
@@ -1185,18 +1186,14 @@
 
   <footer>
     <div class="container">
-      <p id="footerCopy">بَريق للإكسسوارات — الكويت • جميع الحقوق محفوظة</p>
+      <p id="footerCopy">روجيل لاكشري للاكسسوارات الكويت • جميع الحقوق محفوظة</p>
     </div>
   </footer>
 
   <script>
     (function () {
-      const STORAGE_KEYS = {
-        PRODUCTS: 'bareeq_kw_products_v1',
-        SETTINGS: 'bareeq_kw_settings_v1',
-        CART: 'bareeq_kw_cart_v1',
-        SESSION: 'bareeq_kw_session_v1'
-      };
+    
+        
 
       const KUWAIT_AREAS = {
         'العاصمة': ['مدينة الكويت', 'الدسمة', 'الدعية', 'الروضة', 'العديلية', 'اليرموك', 'الشامية'],
@@ -1208,88 +1205,10 @@
       };
 
       const DEFAULT_PRODUCTS = [
-        {
-          id: 'p-1',
-          name: 'قلادة هلال مرصعة زركون',
-          category: 'سلاسل',
-          originalPrice: 22.000,
-          discountPercent: 15,
-          finalPrice: 18.700,
-          badge: 'الأكثر مبيعاً',
-          image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80',
-          description: 'سلسلة أنيقة بطلاء ذهبي لامع مقاومة لتغير اللون ومناسبة للإطلالات اليومية والمناسبات.',
-          inStock: true,
-          pinned: true
-        },
-        {
-          id: 'p-2',
-          name: 'خاتم توقيع ملكي مفتوح',
-          category: 'خواتم',
-          originalPrice: 16.500,
-          discountPercent: 0,
-          finalPrice: 16.500,
-          badge: 'إصدار محدود',
-          image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80',
-          description: 'تصميم عصري قابل للتعديل برفق بلمسة ذهبية دافئة وتفاصيل دقيقة.',
-          inStock: true,
-          pinned: true
-        },
-        {
-          id: 'p-3',
-          name: 'ساعة معصم كلاسيكية بسوار معدني',
-          category: 'ساعات',
-          originalPrice: 44.000,
-          discountPercent: 20,
-          finalPrice: 35.200,
-          badge: 'عرض خاص',
-          image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80',
-          description: 'ساعة أنيقة بميناء داكن متناغم مع إطار ذهبي وحركة كوارتز دقيقة.',
-          inStock: true,
-          pinned: false
-        },
-        {
-          id: 'p-4',
-          name: 'أسورة سلسلة مجدولة فاخرة',
-          category: 'أساور',
-          originalPrice: 19.000,
-          discountPercent: 0,
-          finalPrice: 19.000,
-          badge: '',
-          image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80',
-          description: 'أسورة خفيفة ومريحة بتشطيب مصقول يليق بالتنسيق المنفرد أو مع الساعة.',
-          inStock: true,
-          pinned: false
-        },
-        {
-          id: 'p-5',
-          name: 'نظارة شمسية بإطار ذهبي رفيع',
-          category: 'نظارات',
-          originalPrice: 29.500,
-          discountPercent: 10,
-          finalPrice: 26.550,
-          badge: 'مناسب لصيف الكويت',
-          image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80',
-          description: 'عدسات واقية من الأشعة فوق البنفسجية مع إطار معدني خفيف وأنيق.',
-          inStock: true,
-          pinned: false
-        },
-        {
-          id: 'p-6',
-          name: 'خاتم لؤلؤة بيضاء بإطار ذهبي',
-          category: 'خواتم',
-          originalPrice: 21.000,
-          discountPercent: 0,
-          finalPrice: 21.000,
-          badge: '',
-          image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80',
-          description: 'لمسة ناعمة تجمع بين بريق اللؤلؤ ودفء اللون الذهبي.',
-          inStock: false,
-          pinned: false
-        }
-      ];
+         ];
 
       const DEFAULT_SETTINGS = {
-        storeName: 'بَريق للإكسسوارات — الكويت',
+        storeName: 'روجيل لاكشري للإكسسوارات — الكويت',
         heroHeading: 'تفاصيل ذهبية تبرز حضورك اليومي',
         heroDesc: 'سلاسل وخواتم وأساور وساعات ونظارات مختارة بجودة عالية، مع شحن سريع إلى كافة مناطق الكويت وخيارات دفع مرنة.',
         shippingFee: 2.000
@@ -1303,10 +1222,11 @@
       const runtimeConfig = window.__BAREEQ_CONFIG__ || { googleClientId: '', hasAdminPassword: false };
 
       let state = {
-        products: loadFromStorage(STORAGE_KEYS.PRODUCTS, DEFAULT_PRODUCTS),
-        settings: loadFromStorage(STORAGE_KEYS.SETTINGS, DEFAULT_SETTINGS),
-        cart: loadFromStorage(STORAGE_KEYS.CART, []),
-        session: loadFromStorage(STORAGE_KEYS.SESSION, null),
+        products: DEFAULT_PRODUCTS.map((item)=>({ ...item})),
+        settings: { ...DEFAULT_SETTINGS},
+        cart: []
+        orders:[],
+        session: null,
         activeCategory: 'الكل',
         searchQuery: '',
         sortBy: 'featured',
@@ -1367,7 +1287,7 @@
 
       // Render Storefront
       function renderSettings() {
-        document.title = state.settings.storeName || 'بَريق للإكسسوارات — الكويت';
+        document.title = state.settings.storeName || 'روجيل لاكشري للإكسسوارات — الكويت';
         document.getElementById('storeTitleDisplay').textContent = state.settings.storeName;
         document.getElementById('heroHeadingDisplay').innerHTML = escapeHtml(state.settings.heroHeading).replace(
           /(\S+)$/,
@@ -1637,7 +1557,7 @@
               token: adminAuth.token,
               avatar: makeAvatarDataUrl(name)
             };
-            saveToStorage(STORAGE_KEYS.SESSION, state.session);
+          
             renderSessionUI();
             closeModal('authModal');
             document.getElementById('loginForm').reset();
@@ -1653,7 +1573,7 @@
             email,
             avatar: makeAvatarDataUrl(name)
           };
-          saveToStorage(STORAGE_KEYS.SESSION, state.session);
+      
           renderSessionUI();
           closeModal('authModal');
           document.getElementById('loginForm').reset();
@@ -1679,7 +1599,8 @@
               email: 'google-user@example.com',
               avatar: makeAvatarDataUrl('G')
             };
-            saveToStorage(STORAGE_KEYS.SESSION, state.session);
+            
+            
             renderSessionUI();
             closeModal('authModal');
             showToast('تم الدخول عبر جوجل (أضف GOOGLE_CLIENT_ID على Vercel لتفعيل الربط الرسمي)', 'info');
@@ -1700,7 +1621,7 @@
                   email: profile.email || '',
                   avatar: profile.picture || makeAvatarDataUrl(profile.name || 'G')
                 };
-                saveToStorage(STORAGE_KEYS.SESSION, state.session);
+            
                 renderSessionUI();
                 closeModal('authModal');
                 showToast(`تم تسجيل الدخول عبر جوجل: ${state.session.name}`, 'success');
@@ -1914,7 +1835,7 @@
           showToast('تمت إضافة المنتج الجديد بنجاح', 'success');
         }
 
-        saveToStorage(STORAGE_KEYS.PRODUCTS, state.products);
+        
         renderCategories();
         renderProducts();
         renderAdminProductsList();
@@ -1940,7 +1861,7 @@
           heroDesc: document.getElementById('setHeroDesc').value.trim() || DEFAULT_SETTINGS.heroDesc
         };
 
-        saveToStorage(STORAGE_KEYS.SETTINGS, state.settings);
+        
         renderSettings();
         showToast('تم حفظ إعدادات المتجر والشحن', 'success');
       }
@@ -1972,7 +1893,7 @@
         document.getElementById('openAuthBtn').addEventListener('click', () => openModal('authModal'));
         document.getElementById('logoutBtn').addEventListener('click', () => {
           state.session = null;
-          saveToStorage(STORAGE_KEYS.SESSION, null);
+      
           renderSessionUI();
           closeModal('adminModal');
           showToast('تم تسجيل الخروج', 'info');
@@ -2060,7 +1981,7 @@
             return;
           }
 
-          saveToStorage(STORAGE_KEYS.CART, state.cart);
+        
           updateCartBadge();
           renderCartModal();
         });
@@ -2077,7 +1998,7 @@
 
           state.cart = [];
           state.appliedPromo = null;
-          saveToStorage(STORAGE_KEYS.CART, state.cart);
+          
           updateCartBadge();
           closeModal('cartModal');
           showToast(`تم استلام طلبك بنجاح وسيتم التوصيل إلى ${gov} — ${area}`, 'success');
@@ -2100,7 +2021,7 @@
 
         document.getElementById('resetDefaultProductsBtn').addEventListener('click', () => {
           state.products = structuredClone(DEFAULT_PRODUCTS);
-          saveToStorage(STORAGE_KEYS.PRODUCTS, state.products);
+          
           renderCategories();
           renderProducts();
           renderAdminProductsList();
@@ -2116,7 +2037,7 @@
           } else if (delBtn) {
             const id = delBtn.dataset.adminDelete;
             state.products = state.products.filter((p) => p.id !== id);
-            saveToStorage(STORAGE_KEYS.PRODUCTS, state.products);
+            
             renderCategories();
             renderProducts();
             renderAdminProductsList();
