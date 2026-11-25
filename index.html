@@ -2050,6 +2050,84 @@
       bindEvents();
       initGoogleAuth();
     })();
+   async function loginAdmin(passwordInput) {
+  const res = await fetch("/api/verify-admin", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ password: passwordInput }),
+  });
+
+  if (!res.ok) {
+    throw new Error("كلمة سر المشرف غير صحيحة");
+  }
+
+  sessionStorage.setItem("bareeq_admin_pass", passwordInput);
+  return true;
+}
+
+function getAdminPassword() {
+  return sessionStorage.getItem("bareeq_admin_pass") || "";
+}
+
+// تحميل المنتجات للزائر والمشرف عند فتح الصفحة أو عمل ريفريش
+async function loadStoreProducts() {
+  const res = await fetch("/api/products", { cache: "no-store" });
+  const data = await res.json();
+  const products = res.ok && Array.isArray(data.products) ? data.products : [];
+  if (typeof renderProducts === "function") {
+    renderProducts(products);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadStoreProducts);
+
+// حفظ أو تعديل منتج من لوحة المشرف
+async function saveAdminProduct(productData) {
+  const pass = getAdminPassword();
+  const res = await fetch("/api/products", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-admin-password": pass,
+    },
+    body: JSON.stringify({ product: productData, adminPassword: pass }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "فشل حفظ المنتج");
+  if (typeof renderProducts === "function") {
+    renderProducts(data.products || []);
+  }
+}
+
+// إرسال طلب جديد من العميل
+async function sendCustomerOrder(orderData) {
+  const res = await fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ order: orderData }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "فشل إرسال الطلب");
+  return data.order;
+}
+
+// جلب وعرض الطلبات داخل لوحة المشرف
+async function loadAdminOrders() {
+  const pass = getAdminPassword();
+  const res = await fetch("/api/orders", {
+    method: "GET",
+    headers: { "x-admin-password": pass },
+    cache: "no-store",
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "فشل جلب الطلبات");
+  if (typeof renderOrders === "function") {
+    renderOrders(Array.isArray(data.orders) ? data.orders : []);
+  }
+}
   </script>
 </body>
 </html>
