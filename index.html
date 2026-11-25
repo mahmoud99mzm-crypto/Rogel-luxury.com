@@ -2128,7 +2128,7 @@ async function loadAdminOrders() {
     renderOrders(Array.isArray(data.orders) ? data.orders : []);
   }
 }
-    <script>
+    
   // تسجيل دخول المشرف وحفظ كلمة السر في sessionStorage فقط
   async function loginAdmin(passwordInput) {
     const res = await fetch("/api/verify-admin", {
