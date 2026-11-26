@@ -2256,5 +2256,34 @@ async function loadAdminOrders() {
   });
 </script>
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://tvehmaaosdptlvgrbwpm";
+const SUPABASE_KEY = "sb_publishable_kd-G1PnEB0vDog11oKPN0g_MLCXJOqr";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// دي اللي بتجيب المنتجات من الداتابيز
+async function loadProducts() {
+  let { data, error } = await supabaseClient.from('products').select('*').order('id', {ascending: false});
+  if (error) { console.log(error); return; }
+  console.log("المنتجات:", data);
+  // هنا هتعرضهم في الموقع
+  // لو عندك دالة displayProducts استدعيها هنا
+  // displayProducts(data);
+}
+
+// دي اللي بتحفظ منتج جديد
+async function addProduct(name, price, image) {
+  let { data, error } = await supabaseClient.from('products').insert([
+    { name: name, price: price, image: image }
+  ]);
+  if (error) { alert("فيه مشكلة: " + error.message); return; }
+  alert("اتحفظ بنجاح!");
+  loadProducts();
+}
+
+loadProducts();
+</script>
 </body>
 </html>
